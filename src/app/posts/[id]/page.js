@@ -5,7 +5,10 @@ import Link from 'next/link';
 import Post from '@/components/Post';
 import Comments from '@/components/Comments';
 
-export default async function PostPage({ params }) {
+export default async function PostPage({ params: rawParams }) {
+  // Await the params object
+  const params = await rawParams;
+
   const db = getFirestore(app);
   let data = {};
   const querySnapshot = await getDoc(doc(db, 'posts', params.id));
